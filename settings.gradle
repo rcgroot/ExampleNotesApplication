@@ -1,0 +1,5 @@
+rootProject.name = "NotesApplication"
+include ':app'
+include ':notes_feature'
+include ':backend'
+include ':backend_mock'
