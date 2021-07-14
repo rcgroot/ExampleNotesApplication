@@ -7,10 +7,14 @@
         <variable
             name="note"
             type="com.example.notesfeature.internal.notelist.service.Note" />
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
 
     </data>
 
     <LinearLayout
+        android:onClick="@{onClickListener}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

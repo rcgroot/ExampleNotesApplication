@@ -1,6 +1,7 @@
 package com.example.notesfeature.internal.notelist.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -8,8 +9,9 @@ import com.example.notesfeature.R
 import com.example.notesfeature.databinding.FragmentItemBinding
 import com.example.notesfeature.internal.notelist.service.Note
 
-class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.NotesViewHolder>() {
+internal class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.NotesViewHolder>() {
 
+    var listener: NoteSelectionListener? = null
     var notes: List<Note> = emptyList()
         set(value) {
             field = value
@@ -28,10 +30,18 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.NotesViewHolder>(
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        holder.binding.note = notes[position]
+        val note = notes[position]
+        holder.binding.note = note
+        holder.binding.onClickListener = View.OnClickListener {
+            listener?.onNoteSelected(note)
+        }
     }
 
     override fun getItemCount(): Int = notes.size
 
     class NotesViewHolder(val binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root)
+}
+
+internal interface NoteSelectionListener {
+    fun onNoteSelected(note: Note)
 }

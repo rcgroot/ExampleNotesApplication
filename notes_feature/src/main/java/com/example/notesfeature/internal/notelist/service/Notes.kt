@@ -3,12 +3,12 @@ package com.example.notesfeature.internal.notelist.service
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Notes(
+internal data class Notes(
     val notes: List<Note>
 )
 
 @Serializable
-data class Note(
+internal data class Note(
     val id: Int,
     val title: String,
     val body: String

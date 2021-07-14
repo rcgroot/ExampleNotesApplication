@@ -8,6 +8,9 @@
         <variable
             name="view"
             type="com.example.notesfeature.internal.notelist.view.NoteListViewContainer" />
+        <variable
+            name="presenter"
+            type="com.example.notesfeature.internal.notelist.NoteListPresenter" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -17,6 +20,7 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         app:notes="@{view.notes}"
+        app:listener="@{note -> presenter.onNoteSelected(note)}"
         tools:context=".internal.notelist.NoteListFragment"
         tools:listitem="@layout/fragment_item" />
 </layout>

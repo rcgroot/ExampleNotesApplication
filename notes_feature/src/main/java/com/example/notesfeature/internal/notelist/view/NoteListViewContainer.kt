@@ -4,6 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.notesfeature.internal.notelist.service.Note
 import com.example.notesfeature.internal.notelist.service.Notes
 
-class NoteListViewContainer {
+internal class NoteListViewContainer {
     val notes = MutableLiveData<List<Note>>()
 }

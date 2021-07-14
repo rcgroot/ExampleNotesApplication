@@ -7,7 +7,7 @@ import com.example.backend.BackendCommunication
 import com.example.notesfeature.internal.notelist.service.NoteService
 import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
 
-class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
+internal class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
 
     val presenter = NoteListPresenter(
         NoteListViewContainer(),

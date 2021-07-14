@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class NoteService(
+internal class NoteService(
     private val backendCommunication: BackendCommunication
 ) {
 
