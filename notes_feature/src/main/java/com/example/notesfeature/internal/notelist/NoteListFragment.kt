@@ -1,3 +1,4 @@
+// ADR # 20. Feature modules: Put private API classes into package named 'internal'
 package com.example.notesfeature.internal.notelist
 
 import android.os.Bundle
@@ -10,6 +11,10 @@ import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.FragmentItemListBinding
 
+/**
+ * ADR # 14. Feature modules: Limit public API with 'internal' visibility
+ * ADR # 19. Organise source files into packages by feature, not layers
+ */
 internal class NoteListFragment(
     backend: BackendCommunication
 ) : Fragment() {
@@ -29,7 +34,7 @@ internal class NoteListFragment(
             view = viewModel.presenter.view
             presenter = viewModel.presenter
             lifecycleOwner = viewLifecycleOwner
-            NoteListNavigator(parentFragmentManager).observe(
+            NoteListNavigator(this@NoteListFragment).observe(
                 viewLifecycleOwner,
                 viewModel.presenter.navigation
             )

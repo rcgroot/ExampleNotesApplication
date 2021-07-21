@@ -9,6 +9,9 @@ import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
 
 internal class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
 
+    /**
+     * ADR # 4. MVP: Store Presenter inside ViewModel
+     */
     val presenter = NoteListPresenter(
         NoteListViewContainer(),
         NoteListNavigation(),
@@ -16,10 +19,18 @@ internal class NoteListViewModel(backendCommunication: BackendCommunication) : V
         viewModelScope
     )
 
+    init {
+        presenter.start()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        presenter.clear()
+    }
+
     class Factory(private val backendCommunication: BackendCommunication) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T =
             NoteListViewModel(backendCommunication) as T
-
     }
 }

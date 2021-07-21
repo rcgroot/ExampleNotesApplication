@@ -7,6 +7,7 @@
         <variable
             name="note"
             type="com.example.notesfeature.internal.notelist.service.Note" />
+
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener" />
@@ -14,16 +15,15 @@
     </data>
 
     <LinearLayout
-        android:onClick="@{onClickListener}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{onClickListener}"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/item_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="@{note.title}"
             android:textAppearance="?attr/textAppearanceListItem"
             tools:text="The title of the note entry" />
@@ -32,7 +32,6 @@
             android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:text="@{note.body}"
             android:textAppearance="?attr/textAppearanceListItemSecondary"
             tools:text="The body of the note entry" />

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ADR # 15. Feature modules: Limit public API by marking all resources private-->
+    <public name="notes__title" type="string" />
+</resources>

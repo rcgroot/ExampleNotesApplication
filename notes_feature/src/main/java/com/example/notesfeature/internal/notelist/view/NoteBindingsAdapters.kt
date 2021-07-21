@@ -1,11 +1,11 @@
 package com.example.notesfeature.internal.notelist.view
 
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notesfeature.internal.notelist.service.Note
 
 @BindingAdapter("notes")
-internal fun RecyclerView.setNotes(notes: List<Note>?) {
+internal fun RecyclerView.setNotes(state: NoteState?) {
     val notesListAdapter: NotesListAdapter
     if (adapter == null) {
         notesListAdapter = NotesListAdapter()
@@ -13,11 +13,11 @@ internal fun RecyclerView.setNotes(notes: List<Note>?) {
     } else {
         notesListAdapter = adapter as NotesListAdapter
     }
-    notesListAdapter.notes = notes ?: emptyList()
+    notesListAdapter.notes = (state as? NoteState.NoteList)?.notes ?: emptyList()
 }
 
 @BindingAdapter("listener")
-internal fun RecyclerView.setNotes(listener: NoteSelectionListener?) {
+internal fun RecyclerView.setListener(listener: NoteSelectionListener?) {
     val notesListAdapter: NotesListAdapter
     if (adapter == null) {
         notesListAdapter = NotesListAdapter()
@@ -27,3 +27,11 @@ internal fun RecyclerView.setNotes(listener: NoteSelectionListener?) {
     }
     notesListAdapter.listener = listener
 }
+
+@BindingAdapter("loading")
+internal fun ContentLoadingProgressBar.setLoading(state: NoteState?) =
+    if (state == NoteState.Loading) {
+        this.show()
+    } else {
+        this.hide()
+    }

@@ -8,19 +8,41 @@
         <variable
             name="view"
             type="com.example.notesfeature.internal.notelist.view.NoteListViewContainer" />
+
         <variable
             name="presenter"
             type="com.example.notesfeature.internal.notelist.NoteListPresenter" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:name="com.example.notesfeature.ItemFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        app:notes="@{view.notes}"
-        app:listener="@{note -> presenter.onNoteSelected(note)}"
-        tools:context=".internal.notelist.NoteListFragment"
-        tools:listitem="@layout/fragment_item" />
+        android:layout_margin="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:name="com.example.notesfeature.ItemFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:listener="@{note -> presenter.onNoteSelected(note)}"
+            app:notes="@{view.notes}"
+            tools:context=".internal.notelist.NoteListFragment"
+            tools:listitem="@layout/fragment_item" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loading="@{view.notes}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
