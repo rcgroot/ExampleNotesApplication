@@ -4,17 +4,22 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.notesfeature.internal.notedetail.NoteFragment
-import com.example.notesfeature.internal.notelist.service.Note
+import com.example.notesfeature.internal.service.Note
 
 internal class NoteListNavigation {
 
     /**
      * ADR # 9. Use Consumable and ConsumingObserver for navigation and other one-time triggers
      */
-    val step = MutableLiveData<Consumable<Note>>()
+    private val step = MutableLiveData<Consumable<Note>>()
 
     fun openNoteDetails(note: Note) {
         step.value = Consumable(note)
+    }
+
+    fun observe(owner: LifecycleOwner, action: (Note) -> Unit) {
+        // ADR # 9. Use Consumable and ConsumingObserver for navigation and other one-time triggers
+        step.observe(owner, ConsumingObserver(action))
     }
 }
 
@@ -22,9 +27,8 @@ internal class NoteListNavigator(
     private val fragment: NoteListFragment
 ) {
 
-    fun observe(owner: LifecycleOwner, navigation: NoteListNavigation) {
-        // ADR # 9. Use Consumable and ConsumingObserver for navigation and other one-time triggers
-        navigation.step.observe(owner, ConsumingObserver { openNote(it) })
+    fun observeNavigation(owner: LifecycleOwner, navigation: NoteListNavigation) {
+        navigation.observe(owner, ::openNote)
     }
 
     private fun openNote(note: Note) {

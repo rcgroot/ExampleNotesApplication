@@ -32,7 +32,7 @@
             app:listener="@{note -> presenter.onNoteSelected(note)}"
             app:notes="@{view.notes}"
             tools:context=".internal.notelist.NoteListFragment"
-            tools:listitem="@layout/fragment_item" />
+            tools:listitem="@layout/notes__list_item" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             style="?android:attr/progressBarStyleLarge"

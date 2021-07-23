@@ -1,4 +1,4 @@
-package com.example.notesfeature.internal.notelist.service
+package com.example.notesfeature.internal.service
 
 import com.example.backend.BackendCommunication
 import com.example.backend.Operation

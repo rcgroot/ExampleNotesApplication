@@ -1,8 +1,8 @@
 // ADR # 20. Feature modules: Put private API classes into package named 'internal'
 package com.example.notesfeature.internal.notelist
 
-import com.example.notesfeature.internal.notelist.service.Note
-import com.example.notesfeature.internal.notelist.service.NoteService
+import com.example.notesfeature.internal.service.Note
+import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

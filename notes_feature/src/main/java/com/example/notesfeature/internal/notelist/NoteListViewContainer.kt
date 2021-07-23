@@ -2,7 +2,7 @@ package com.example.notesfeature.internal.notelist.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.notesfeature.internal.notelist.service.Note
+import com.example.notesfeature.internal.service.Note
 
 /**
  * ADR # 3. MVP: Use LiveData observables container as Presenter's View

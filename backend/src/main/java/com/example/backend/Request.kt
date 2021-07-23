@@ -1,6 +1,6 @@
 package com.example.backend
 
-class Request(
+data class Request(
     val operation: Operation,
     val path: String,
     val body: String? = null,

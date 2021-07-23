@@ -1,7 +1,7 @@
 package com.example.notesfeature.internal.notelist
 
-import com.example.notesfeature.internal.notelist.service.Note
-import com.example.notesfeature.internal.notelist.service.NoteService
+import com.example.notesfeature.internal.service.Note
+import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
@@ -15,8 +15,6 @@ internal class NoteListPresenterTest {
 
     private val note = Note(1, "Title", "Body")
     private val notes: List<Note> = listOf(note)
-
-    @kotlinx.coroutines.ExperimentalCoroutinesApi
     private val scope: CoroutineScope = TestCoroutineScope()
 
     /**
@@ -28,7 +26,7 @@ internal class NoteListPresenterTest {
     private val sut = NoteListPresenter(view, navigation, service, scope)
 
     @Test
-    fun `after initialization note will be loaded`(): Unit = runBlocking {
+    fun `after initialization note will be loaded`() = runBlocking {
         whenever(service.getNotes()).thenReturn(notes)
 
         sut.start()

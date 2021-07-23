@@ -1,10 +1,10 @@
-package com.example.notesfeature.internal.notelist.service
+package com.example.notesfeature.internal.service
 
 import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class Notes(
-    val notes: List<Note>
+    val notes: List<Note> = emptyList()
 )
 
 @Serializable

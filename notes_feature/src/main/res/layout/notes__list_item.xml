@@ -6,7 +6,7 @@
 
         <variable
             name="note"
-            type="com.example.notesfeature.internal.notelist.service.Note" />
+            type="com.example.notesfeature.internal.service.Note" />
 
         <variable
             name="onClickListener"
