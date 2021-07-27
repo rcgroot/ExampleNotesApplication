@@ -10,7 +10,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.lang.Exception
 
 private const val MOCK_NETWORK_DELAY = 750L
 
@@ -63,7 +62,6 @@ private fun getNote(path: String): Response {
         notFound
     }
 }
-
 
 internal fun post(path: String, body: String?) = when {
     body == null -> badRequest
