@@ -40,4 +40,12 @@ class MockBackendCommunicationKtTest {
 
         assertThat(result.status).isEqualTo(404)
     }
+
+    @Test
+    fun `post new note`() {
+        val result = post("/notes", """{"id": 0, "title":"New note","body":"Just creating a new note"}""")
+
+        assertThat(result.status).isEqualTo(201)
+        assertThat(result.body).isEqualTo("/notes/3")
+    }
 }
