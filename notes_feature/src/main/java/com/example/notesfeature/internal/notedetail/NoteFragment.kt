@@ -20,7 +20,7 @@ internal class NoteFragment : DialogFragment() {
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Some title")
-            .setMessage("With a body")
+            .setTitle("Unknown title")
+            .setMessage("Missing body")
             .create()
 }
