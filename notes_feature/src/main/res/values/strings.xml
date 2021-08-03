@@ -2,4 +2,8 @@
 <resources>
     <!-- ADR # 16. Feature modules: Use resourcePrefix-->
     <string name="notes__title">Notes</string>
+
+    <!-- NoteDetails -->
+    <string name="notes__note_details_title">Title</string>
+    <string name="notes__note_details_body">Content</string>
 </resources>
