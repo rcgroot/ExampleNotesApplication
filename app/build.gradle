@@ -36,7 +36,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":notes_feature"))
+    implementation(project(":notes_feature")) // In real live ref maven repo artifact
+
     implementation(project(":backend"))
     implementation(project(":backend_mock"))
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

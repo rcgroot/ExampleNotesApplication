@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation(project(":backend"))
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
