@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="view"
+            type="com.example.notesfeature.internal.notedetail.NoteDetailsContainer" />
+
+        <variable
+            name="presenter"
+            type="com.example.notesfeature.internal.notedetail.NoteDetailsPresenter" />
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/close_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:onClick="@{onClickListener}"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/close_icon"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notes__note_details_title"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                tools:text="The title of the note entry" />
+
+            <TextView
+                android:id="@+id/item_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:layout_marginBottom="25dp"
+                app:titleOnLoaded="@{view.note}"
+                tools:text="The title of the note entry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notes__note_details_body"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                tools:text="The title of the note entry" />
+
+            <TextView
+                android:id="@+id/item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:contentOnLoaded="@{view.note}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                tools:text="The body of the note entry" />
+        </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loading="@{view.note}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

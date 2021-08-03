@@ -3,7 +3,7 @@ package com.example.notesfeature.internal.notelist
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notesfeature.internal.notelist.view.NoteState
+import com.example.notesfeature.internal.service.NoteState
 
 @BindingAdapter("notes")
 internal fun RecyclerView.setNotes(state: NoteState?) {

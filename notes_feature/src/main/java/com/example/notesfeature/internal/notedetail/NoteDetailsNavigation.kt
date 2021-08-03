@@ -1,20 +1,18 @@
-package com.example.notesfeature.internal.notelist
+package com.example.notesfeature.internal.notedetail
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.backend.BackendCommunication
-import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
 import com.example.notesfeature.internal.service.Note
 
-internal class NoteListNavigation {
+internal class NoteDetailsNavigation {
 
     /**
      * ADR # 9. Use Consumable and ConsumingObserver for navigation and other one-time triggers
      */
     private val step = MutableLiveData<Consumable<Note>>()
 
-    fun openNoteDetails(note: Note) {
+    fun closeNoteDetails(note: Note) {
         step.value = Consumable(note)
     }
 
@@ -24,19 +22,16 @@ internal class NoteListNavigation {
     }
 }
 
-internal class NoteListNavigator(
-    private val fragment: NoteListFragment,
-    private val backend: BackendCommunication
+internal class NoteDetailsNavigator(
+    private val fragment: NoteDetailsFragment
 ) {
 
-    fun observeNavigation(owner: LifecycleOwner, navigation: NoteListNavigation) {
-        navigation.observe(owner, ::openNote)
+    fun observeNavigation(owner: LifecycleOwner, navigation: NoteDetailsNavigation) {
+        navigation.observe(owner, ::closeNote)
     }
 
-    private fun openNote(note: Note) {
-        NoteDetailsFragment(backend, note.id)
-            // ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
-            .show(fragment.childFragmentManager, "NOTE:${note.id}")
+    private fun closeNote(note: Note) {
+        fragment.dismiss()
     }
 }
 

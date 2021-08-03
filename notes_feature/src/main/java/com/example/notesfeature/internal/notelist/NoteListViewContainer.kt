@@ -1,7 +1,9 @@
 package com.example.notesfeature.internal.notelist.view
+// TODO the package directive does not match the file location, maybe it should be refactored?
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.notesfeature.internal.service.NoteState
 import com.example.notesfeature.internal.service.Note
 
 /**
@@ -20,12 +22,4 @@ internal class NoteListViewContainer {
     fun showLoading() {
         _notes.postValue(NoteState.Loading)
     }
-}
-
-/**
- * ADR # 8. Use sealed classes for modelling UI state
- */
-internal sealed class NoteState {
-    object Loading : NoteState()
-    data class NoteList(val notes: List<Note>) : NoteState()
 }
