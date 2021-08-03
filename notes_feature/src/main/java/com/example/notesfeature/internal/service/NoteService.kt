@@ -17,4 +17,10 @@ internal class NoteService(
         val response = backendCommunication.execute(request)
         Json.decodeFromString<Notes>(response.body).notes
     }
+
+    suspend fun getNote(id: Int): Note = withContext(Dispatchers.IO) {
+        val request = Request(Operation.GET, "/notes/$id")
+        val response = backendCommunication.execute(request)
+        Json.decodeFromString(response.body)
+    }
 }
