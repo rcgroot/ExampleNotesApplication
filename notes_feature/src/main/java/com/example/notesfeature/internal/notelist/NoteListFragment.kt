@@ -17,7 +17,7 @@ import com.example.notesfeature.databinding.NotesListBinding
  * ADR # 19. Organise source files into packages by feature, not layers
  */
 internal class NoteListFragment(
-    backend: BackendCommunication
+    private val backend: BackendCommunication
 ) : Fragment() {
 
     private val viewModel by viewModels<NoteListViewModel> { NoteListViewModel.Factory(backend) }
@@ -39,7 +39,7 @@ internal class NoteListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NoteListNavigator(this).observeNavigation(
+        NoteListNavigator(this, backend).observeNavigation(
             viewLifecycleOwner,
             viewModel.presenter.navigation
         )
