@@ -12,13 +12,24 @@ import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesNoteDetailsBinding
 
+private const val ARGUMENTS_ID = "arg_id"
+
 /**
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  * ADR # 19. Organise source files into packages by feature, not layers
  */
-internal class NoteDetailsFragment(backend: BackendCommunication, private val noteId: Int) : DialogFragment() {
+internal class NoteDetailsFragment(backend: BackendCommunication) : DialogFragment() {
 
     private val viewModel by viewModels<NoteDetailsViewModel> { NoteDetailsViewModel.Factory(backend, noteId) }
+
+    private val noteId: Int
+        get() = requireNotNull(arguments?.getInt(ARGUMENTS_ID))
+
+    fun withArguments(id: Int) = apply {
+        arguments = Bundle().apply {
+            putInt(ARGUMENTS_ID, id)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

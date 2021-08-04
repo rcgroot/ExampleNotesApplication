@@ -34,7 +34,8 @@ internal class NoteListNavigator(
     }
 
     private fun openNote(note: Note) {
-        NoteDetailsFragment(backend, note.id)
+        NoteDetailsFragment(backend)
+            .withArguments(note.id)
             // ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
             .show(fragment.childFragmentManager, "NOTE:${note.id}")
     }
