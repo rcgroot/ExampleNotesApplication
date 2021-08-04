@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
@@ -32,7 +31,6 @@ internal class NoteDetailsFragment(backend: BackendCommunication, private val no
         ).apply {
             view = viewModel.presenter.view
             presenter = viewModel.presenter
-            onClickListener = View.OnClickListener { viewModel.presenter.onCloseNoteSelected() }
             lifecycleOwner = viewLifecycleOwner
         }.root
 
