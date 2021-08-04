@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
 
         // ADR # 16. Feature modules: Use resourcePrefix
         resourcePrefix 'notes__'
@@ -26,8 +24,8 @@ android {
             consumerProguardFiles 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

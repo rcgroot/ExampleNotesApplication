@@ -7,7 +7,7 @@
 
         <variable
             name="view"
-            type="com.example.notesfeature.internal.notelist.view.NoteListViewContainer" />
+            type="com.example.notesfeature.internal.notelist.NoteListViewContainer" />
 
         <variable
             name="presenter"
@@ -43,6 +43,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loading="@{view.notes}" />
+            app:loading="@{view.isLoading}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

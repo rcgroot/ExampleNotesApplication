@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.internal.service.NoteService
-import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
 
 internal class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
 
