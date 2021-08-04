@@ -14,8 +14,6 @@ internal class NoteDetailsContainer {
     val note: LiveData<NoteState>
         get() = _note
 
-    val activeNote = MutableLiveData<Note>()
-
     fun showNote(note: Note) {
         _note.postValue(NoteState.SingleNote(note))
     }
