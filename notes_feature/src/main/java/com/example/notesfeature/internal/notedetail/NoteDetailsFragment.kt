@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesNoteDetailsBinding
+
+internal fun noteDetailsFragment(backendCommunication: BackendCommunication): Fragment =
+    NoteDetailsFragment(backendCommunication)
 
 private const val ARGUMENTS_ID = "arg_id"
 

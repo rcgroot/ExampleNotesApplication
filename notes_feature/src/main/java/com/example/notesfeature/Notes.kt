@@ -3,6 +3,8 @@ package com.example.notesfeature
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.example.backend.BackendCommunication
+import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
+import com.example.notesfeature.internal.notedetail.noteDetailsFragment
 import com.example.notesfeature.internal.notelist.NoteListFragment
 
 /**
@@ -18,6 +20,7 @@ fun notesFragmentFactory(backendCommunication: BackendCommunication) = object : 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment =
         when (Class.forName(className).kotlin) {
             NoteListFragment::class -> noteListFragment(backendCommunication)
+            NoteDetailsFragment::class -> noteDetailsFragment(backendCommunication)
             else -> super.instantiate(classLoader, className)
         }
 }
