@@ -1,9 +1,7 @@
-package com.example.notesfeature.internal.notelist.view
-// TODO the package directive does not match the file location, maybe it should be refactored?
+package com.example.notesfeature.internal.notelist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.notesfeature.internal.service.NoteState
 import com.example.notesfeature.internal.service.Note
 
 /**
@@ -11,15 +9,19 @@ import com.example.notesfeature.internal.service.Note
  */
 internal class NoteListViewContainer {
 
-    private val _notes = MutableLiveData<NoteState>()
-    val notes: LiveData<NoteState>
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    private val _notes = MutableLiveData<List<Note>>()
+    val notes: LiveData<List<Note>>
         get() = _notes
 
     fun showNotes(notes: List<Note>) {
-        _notes.postValue(NoteState.NoteList(notes))
+        _notes.postValue(notes)
     }
 
-    fun showLoading() {
-        _notes.postValue(NoteState.Loading)
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.postValue(isLoading)
     }
 }

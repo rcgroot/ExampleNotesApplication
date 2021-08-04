@@ -1,8 +1,8 @@
 // ADR # 20. Feature modules: Put private API classes into package named 'internal'
 package com.example.notesfeature.internal.notedetail
 
+import com.example.notesfeature.internal.notedetail.NoteState.SingleNote
 import com.example.notesfeature.internal.service.NoteService
-import com.example.notesfeature.internal.service.NoteState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  */
 internal class NoteDetailsPresenter(
-    val view: NoteDetailsContainer,
+    val view: NoteDetailsViewContainer,
     val navigation: NoteDetailsNavigation,
     private val service: NoteService,
     private val noteId: Int,
@@ -28,7 +28,7 @@ internal class NoteDetailsPresenter(
      * ADR # 7. MVP: Prefix Presenter methods handling user input with 'on'
      */
     fun onCloseNoteSelected() {
-        navigation.closeNoteDetails((view.note.value as NoteState.SingleNote).note)
+        navigation.closeNoteDetails((view.note.value as SingleNote).note)
     }
 
     fun clear() {
@@ -37,8 +37,9 @@ internal class NoteDetailsPresenter(
 
     private fun loadNote() {
         launch {
-            view.showLoading()
-            view.showNote(service.getNote(noteId))
+            view.setLoading(true)
+            view.showNote(SingleNote(service.getNote(noteId)))
+            view.setLoading(false)
         }
     }
 }

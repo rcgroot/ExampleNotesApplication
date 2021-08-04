@@ -12,7 +12,7 @@ internal class NoteDetailsViewModel(backendCommunication: BackendCommunication, 
      * ADR # 4. MVP: Store Presenter inside ViewModel
      */
     val presenter = NoteDetailsPresenter(
-        NoteDetailsContainer(),
+        NoteDetailsViewContainer(),
         NoteDetailsNavigation(),
         NoteService(backendCommunication),
         noteId,
