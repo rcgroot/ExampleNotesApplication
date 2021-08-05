@@ -2,7 +2,7 @@ package com.example.notesfeature.internal.notelist
 
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
-import com.example.notesfeature.internal.notelist.view.NoteListViewContainer
+import com.example.notesfeature.internal.notelist.NoteListViewContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -32,7 +32,7 @@ internal class NoteListPresenterTest {
 
         sut.start()
 
-        verify(view).showLoading()
+        verify(view).setLoading(true)
         verify(service).getNotes()
         verify(view).showNotes(notes)
     }
