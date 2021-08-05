@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import java.lang.Exception
 
 internal class NoteService(
     private val backendCommunication: BackendCommunication
@@ -21,6 +22,12 @@ internal class NoteService(
     suspend fun getNote(id: Int): Note = withContext(Dispatchers.IO) {
         val request = Request(Operation.GET, "/notes/$id")
         val response = backendCommunication.execute(request)
-        Json.decodeFromString(response.body)
+        try {
+            println("response body: ${response.body}")
+            Json.decodeFromString(response.body)
+        } catch (ex: Exception) {
+            println("ex")
+            Note(-1, "", "")
+        }
     }
 }
