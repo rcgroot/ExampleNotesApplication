@@ -13,7 +13,7 @@ internal class NoteDetailsViewContainer {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _note = MutableLiveData<NoteState>().apply { postValue(NoteState.Placeholder) }
+    private val _note = MutableLiveData<NoteState>(NoteState.Placeholder)
     val note: LiveData<NoteState>
         get() = _note
 

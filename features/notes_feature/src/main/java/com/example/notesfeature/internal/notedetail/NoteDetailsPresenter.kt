@@ -2,6 +2,7 @@
 package com.example.notesfeature.internal.notedetail
 
 import com.example.notesfeature.internal.notedetail.NoteState.SingleNote
+import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -20,6 +21,8 @@ internal class NoteDetailsPresenter(
     scope: CoroutineScope
 ) : CoroutineScope by scope {
 
+    private var currentNote: Note? = null
+
     fun start() {
         loadNote()
     }
@@ -28,7 +31,7 @@ internal class NoteDetailsPresenter(
      * ADR # 7. MVP: Prefix Presenter methods handling user input with 'on'
      */
     fun onCloseNoteSelected() {
-        navigation.closeNoteDetails((view.note.value as SingleNote).note)
+        navigation.closeNoteDetails(currentNote ?: Note(-1, "", ""))
     }
 
     fun clear() {
@@ -38,7 +41,8 @@ internal class NoteDetailsPresenter(
     private fun loadNote() {
         launch {
             view.setLoading(true)
-            view.showNote(SingleNote(service.getNote(noteId)))
+            val note = service.getNote(noteId).also { currentNote = it }
+            view.showNote(SingleNote(note))
             view.setLoading(false)
         }
     }

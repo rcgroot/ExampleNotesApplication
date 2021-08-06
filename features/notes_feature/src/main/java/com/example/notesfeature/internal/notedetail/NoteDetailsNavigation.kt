@@ -1,5 +1,6 @@
 package com.example.notesfeature.internal.notedetail
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -12,7 +13,8 @@ internal class NoteDetailsNavigation {
     /**
      * ADR # 9. Use Consumable and ConsumingObserver for navigation and other one-time triggers
      */
-    private val step = MutableLiveData<Consumable<Note>>()
+    @VisibleForTesting
+    val step = MutableLiveData<Consumable<Note>>()
 
     fun closeNoteDetails(note: Note) {
         step.value = Consumable(note)
