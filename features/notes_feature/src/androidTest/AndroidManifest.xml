@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.example.notesfeature"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+        <activity android:name=".internal.noteslist.NotesListTestActivity" />
+
+    </application>
+</manifest>
