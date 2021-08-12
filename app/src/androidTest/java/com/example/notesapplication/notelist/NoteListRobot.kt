@@ -10,10 +10,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.hamcrest.CoreMatchers.both
 import org.hamcrest.CoreMatchers.instanceOf
 import com.example.notesapplication.R
+import com.example.notesapplication.utils.BaseTestRobot
 
 inline fun notes(block: NoteListRobot.() -> Unit) = NoteListRobot().apply(block)
 
-class NoteListRobot {
+class NoteListRobot: BaseTestRobot() {
 
     fun isVisible() {
         onView(both(withId(R.id.list)).and(instanceOf(RecyclerView::class.java))).check(matches(isDisplayed()))
