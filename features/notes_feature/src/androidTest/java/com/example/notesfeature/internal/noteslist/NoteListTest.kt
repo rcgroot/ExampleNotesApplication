@@ -33,4 +33,19 @@ class NoteListTest {
             clickOnItem(0)
         }
     }
+
+    @Test
+    fun notesListIsEmpty() {
+        // Test when we get an empty result
+        notes {
+            containsThisManyItems(0)
+        }
+    }
+
+    @Test
+    fun notesListContains5Items() {
+        notes {
+            containsThisManyItems(5)
+        }
+    }
 }
