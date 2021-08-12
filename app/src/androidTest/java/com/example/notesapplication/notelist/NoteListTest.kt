@@ -44,4 +44,11 @@ class NoteListTest {
         // Click on first element
         onView(withId(R.id.list)).perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
     }
+
+    @Test
+    fun checkToolbarTitle() {
+        notes {
+            checkToolbarTitle(R.string.notes__title)
+        }
+    }
 }

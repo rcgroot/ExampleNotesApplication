@@ -63,4 +63,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     kaptAndroidTest 'androidx.databinding:databinding-compiler:4.2.2'
+    androidTestImplementation('com.schibsted.spain:barista:3.9.0') {
+        exclude group: 'org.jetbrains.kotlin' // Only if you already use Kotlin in your project
+    }
 }

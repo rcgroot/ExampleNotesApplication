@@ -67,7 +67,7 @@
                 tools:text="The title of the note entry" />
 
             <TextView
-                android:id="@+id/item_content"
+                android:id="@+id/item_content_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:contentOnLoaded="@{view.note}"
@@ -76,6 +76,7 @@
         </LinearLayout>
 
         <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar_loader"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
