@@ -20,7 +20,7 @@
         android:layout_margin="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/notes__list"
             android:name="com.example.notesfeature.ItemFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -33,6 +33,14 @@
             app:notes="@{view.notes}"
             tools:context=".internal.notelist.NoteListFragment"
             tools:listitem="@layout/notes__list_item" />
+
+        <FrameLayout
+            android:id="@+id/notes__container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             style="?android:attr/progressBarStyleLarge"

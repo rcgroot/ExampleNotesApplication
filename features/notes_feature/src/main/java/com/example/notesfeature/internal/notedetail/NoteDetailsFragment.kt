@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
@@ -19,10 +20,9 @@ private const val ARGUMENTS_ID = "ARGUMENTS_ID"
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  * ADR # 19. Organise source files into packages by feature, not layers
  */
-internal class NoteDetailsFragment(backend: BackendCommunication) : DialogFragment() {
+internal class NoteDetailsFragment(backend: BackendCommunication) : Fragment() {
 
-    private val noteId: Int
-        get() = checkNotNull(requireArguments().getInt(ARGUMENTS_ID))
+
     private val viewModel by viewModels<NoteDetailsViewModel> { NoteDetailsViewModel.Factory(backend, noteId) }
 
     override fun onCreateView(
@@ -55,4 +55,8 @@ internal class NoteDetailsFragment(backend: BackendCommunication) : DialogFragme
             ARGUMENTS_ID to id
         )
     }
+
+    @VisibleForTesting
+    val noteId: Int
+        get() = checkNotNull(requireArguments().getInt(ARGUMENTS_ID))
 }

@@ -2,7 +2,6 @@ package com.example.notesfeature.internal.notelist
 
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
-import com.example.notesfeature.internal.notelist.NoteListViewContainer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope

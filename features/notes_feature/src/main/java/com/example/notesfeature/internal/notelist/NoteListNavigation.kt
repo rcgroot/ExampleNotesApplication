@@ -1,8 +1,10 @@
 package com.example.notesfeature.internal.notelist
 
+import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.example.backend.BackendCommunication
+import com.example.notesfeature.R
 import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
 import com.example.notesfeature.internal.service.Note
 import com.example.support.Consumable
@@ -35,9 +37,12 @@ internal class NoteListNavigator(
     }
 
     private fun openNote(note: Note) {
-        NoteDetailsFragment(backend)
+        val childFragment = NoteDetailsFragment(backend)
             .withArguments(note.id) // type safe arguments
-// ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
-            .show(fragment.childFragmentManager, "NOTE:${note.id}")
+        // ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
+        fragment.childFragmentManager.commit {
+            replace(R.id.notes__container, childFragment, "NOTE:${note.id}")
+        }
+
     }
 }

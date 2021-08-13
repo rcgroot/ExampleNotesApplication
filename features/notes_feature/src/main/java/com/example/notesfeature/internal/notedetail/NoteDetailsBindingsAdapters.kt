@@ -6,9 +6,7 @@ import androidx.databinding.BindingAdapter
 @BindingAdapter("titleOnLoaded")
 internal fun TextView.setNoteTitle(state: NoteState?) {
     val notes = (state as? NoteState.SingleNote)?.note
-    notes?.let {
-        text = it.title
-    }
+    text = notes?.title ?: ""
 }
 
 @BindingAdapter("contentOnLoaded")

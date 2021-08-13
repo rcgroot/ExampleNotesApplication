@@ -2,10 +2,9 @@ package com.example.notesfeature.internal.notedetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.backend.BackendCommunication
-import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
-import kotlinx.coroutines.CoroutineScope
 
 internal class NoteDetailsViewModel(backendCommunication: BackendCommunication, noteId: Int) : ViewModel() {
 
@@ -17,7 +16,7 @@ internal class NoteDetailsViewModel(backendCommunication: BackendCommunication, 
         NoteDetailsNavigation(),
         NoteService(backendCommunication),
         noteId,
-        CoroutineScope(NotesDispatchers.Main)
+        viewModelScope
     )
 
     init {
