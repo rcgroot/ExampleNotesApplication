@@ -14,15 +14,16 @@ class NotesListTestActivity : FragmentActivity() {
     private val backendCommunication: BackendCommunication = MockBackendCommunication(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = notesFragmentFactory(backendCommunication)
+        supportFragmentManager.fragmentFactory = notesFragmentFactory(this, backendCommunication)
         super.onCreate(savedInstanceState)
         val layout = FrameLayout(this)
         layout.id = View.generateViewId()
         setContentView(layout)
+        val fragment = noteListFragment(this, backendCommunication)
         supportFragmentManager.commit {
             add(
                 layout.id,
-                noteListFragment(backendCommunication)
+                fragment
             )
         }
     }

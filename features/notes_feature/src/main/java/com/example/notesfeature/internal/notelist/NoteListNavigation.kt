@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
 import com.example.notesfeature.internal.service.Note
+import com.example.notesfeature.internal.service.NoteService
 import com.example.support.Consumable
 import com.example.support.ConsumingObserver
 
@@ -27,7 +28,7 @@ internal class NoteListNavigation {
 
 internal class NoteListNavigator(
     private val fragment: NoteListFragment,
-    private val backend: BackendCommunication
+    private val noteService: NoteService
 ) {
 
     fun observeNavigation(owner: LifecycleOwner, navigation: NoteListNavigation) {
@@ -35,7 +36,7 @@ internal class NoteListNavigator(
     }
 
     private fun openNote(note: Note) {
-        NoteDetailsFragment(backend)
+        NoteDetailsFragment(noteService)
             .withArguments(note.id) // type safe arguments
 // ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
             .show(fragment.childFragmentManager, "NOTE:${note.id}")

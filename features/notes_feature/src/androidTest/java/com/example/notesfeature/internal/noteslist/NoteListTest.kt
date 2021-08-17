@@ -25,7 +25,14 @@ class NoteListTest {
 
     @Test
     fun openFirstNote() {
+        val list = listOf(
+            Note(1, "title 1", "body 1"),
+            Note(2, "title 2", "body 2")
+        )
+        NoteListViewModel.setTestNotes(list)
+
         activityRule.launchActivity(null)
+
         notes {
             isVisible()
             clickOnItem(0)

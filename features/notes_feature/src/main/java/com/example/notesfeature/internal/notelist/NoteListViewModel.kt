@@ -8,7 +8,7 @@ import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.internal.service.NoteServiceImpl
 import kotlinx.coroutines.CoroutineScope
 
-internal class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
+internal class NoteListViewModel(private val noteService: NoteService) : ViewModel() {
 
     companion object {
         var serviceOverride: NoteService? = null
@@ -20,7 +20,7 @@ internal class NoteListViewModel(backendCommunication: BackendCommunication) : V
     val presenter = NoteListPresenter(
         NoteListViewContainer(),
         NoteListNavigation(),
-        serviceOverride ?: NoteServiceImpl(backendCommunication),
+        serviceOverride ?: noteService,
         CoroutineScope(NotesDispatchers.Main)
     )
 
@@ -33,9 +33,9 @@ internal class NoteListViewModel(backendCommunication: BackendCommunication) : V
         presenter.clear()
     }
 
-    class Factory(private val backendCommunication: BackendCommunication) :
+    class Factory(private val noteService: NoteService) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            NoteListViewModel(backendCommunication) as T
+            NoteListViewModel(noteService) as T
     }
 }
