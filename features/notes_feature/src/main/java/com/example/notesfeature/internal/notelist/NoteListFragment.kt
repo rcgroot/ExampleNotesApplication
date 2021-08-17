@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesListBinding
 import com.example.notesfeature.internal.service.NoteService

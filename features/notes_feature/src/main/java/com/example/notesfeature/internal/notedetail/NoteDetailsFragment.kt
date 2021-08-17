@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesNoteDetailsBinding
 import com.example.notesfeature.internal.service.NoteService

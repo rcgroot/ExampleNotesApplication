@@ -2,7 +2,6 @@ package com.example.notesfeature.internal.notelist
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.example.backend.BackendCommunication
 import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
