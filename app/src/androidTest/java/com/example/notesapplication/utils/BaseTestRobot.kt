@@ -66,6 +66,10 @@ abstract class BaseTestRobot {
         Espresso.pressBack()
     }
 
+    fun checkListSize(listRes: Int, listSize: Int) {
+        Espresso.onView(ViewMatchers.withId(listRes)).check(RecyclerMatcher(listSize))
+    }
+
     fun checkToolbarTitle(expectedText: Int) {
         Espresso.onView(
             CoreMatchers.allOf(
