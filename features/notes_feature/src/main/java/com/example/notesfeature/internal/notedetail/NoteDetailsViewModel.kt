@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
+import com.example.notesfeature.internal.service.NoteServiceImpl
 import kotlinx.coroutines.CoroutineScope
 
 internal class NoteDetailsViewModel(backendCommunication: BackendCommunication, noteId: Int) : ViewModel() {
@@ -15,7 +16,7 @@ internal class NoteDetailsViewModel(backendCommunication: BackendCommunication, 
     val presenter = NoteDetailsPresenter(
         NoteDetailsViewContainer(),
         NoteDetailsNavigation(),
-        NoteService(backendCommunication),
+        NoteServiceImpl(backendCommunication),
         noteId,
         CoroutineScope(NotesDispatchers.Main)
     )

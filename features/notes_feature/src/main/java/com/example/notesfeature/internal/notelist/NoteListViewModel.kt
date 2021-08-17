@@ -5,9 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.backend.BackendCommunication
 import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
+import com.example.notesfeature.internal.service.NoteServiceImpl
 import kotlinx.coroutines.CoroutineScope
 
 internal class NoteListViewModel(backendCommunication: BackendCommunication) : ViewModel() {
+
+    companion object {
+        var serviceOverride: NoteService? = null
+    }
 
     /**
      * ADR # 4. MVP: Store Presenter inside ViewModel
@@ -15,7 +20,7 @@ internal class NoteListViewModel(backendCommunication: BackendCommunication) : V
     val presenter = NoteListPresenter(
         NoteListViewContainer(),
         NoteListNavigation(),
-        NoteService(backendCommunication),
+        serviceOverride ?: NoteServiceImpl(backendCommunication),
         CoroutineScope(NotesDispatchers.Main)
     )
 
