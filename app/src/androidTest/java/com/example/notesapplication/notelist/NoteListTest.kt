@@ -9,7 +9,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.example.notesapplication.MainActivity
 import com.example.notesapplication.R
 import com.example.notesapplication.utils.DataBindingIdlingResourceRule
 import com.example.notesapplication.utils.DispatchersRule
@@ -24,7 +23,7 @@ import org.junit.runner.RunWith
 class NoteListTest {
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
+    val activityRule = ActivityTestRule(NotesListTestActivity::class.java, false, false)
 
     @get:Rule
     val dataBindingIdlingResourceRule = DataBindingIdlingResourceRule(activityRule)
@@ -35,6 +34,13 @@ class NoteListTest {
     @Before
     fun before() {
         activityRule.launchActivity(null)
+    }
+
+    @Test
+    fun checkListSize() {
+        notes {
+            checkListSize(R.id.list, 10)
+        }
     }
 
     @Test
