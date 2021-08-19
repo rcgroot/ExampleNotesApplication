@@ -2,7 +2,7 @@ package com.example.notesfeature.internal.noteslist
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.example.notesfeature.internal.notelist.NoteListViewModel
+import com.example.notesfeature.Graph
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.utils.DataBindingIdlingResourceRule
@@ -29,7 +29,7 @@ class NoteListTest {
             Note(1, "title 1", "body 1"),
             Note(2, "title 2", "body 2")
         )
-        NoteListViewModel.setTestNotes(list)
+        Graph.setTestNotes(list)
 
         activityRule.launchActivity(null)
 
@@ -41,7 +41,7 @@ class NoteListTest {
 
     @Test
     fun notesListIsEmpty() {
-        NoteListViewModel.setTestNotes(emptyList())
+        Graph.setTestNotes(emptyList())
 
         activityRule.launchActivity(null)
 
@@ -60,7 +60,7 @@ class NoteListTest {
             Note(4, "title 4", "body 4"),
             Note(5, "title 5", "body 5")
         )
-        NoteListViewModel.setTestNotes(list)
+        Graph.setTestNotes(list)
 
         activityRule.launchActivity(null)
 
@@ -70,7 +70,7 @@ class NoteListTest {
     }
 }
 
-internal fun NoteListViewModel.Companion.setTestNotes(listOfNotes: List<Note>) {
+internal fun Graph.Companion.setTestNotes(listOfNotes: List<Note>) {
     serviceOverride = NoteServiceStub().apply {
         notes = listOfNotes
     }

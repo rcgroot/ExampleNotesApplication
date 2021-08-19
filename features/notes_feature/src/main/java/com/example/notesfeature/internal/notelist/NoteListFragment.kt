@@ -32,7 +32,7 @@ internal class NoteListFragment(
             container,
             false
         ).apply {
-            view = viewModel.presenter.view
+            view = viewModel.view
             presenter = viewModel.presenter
             lifecycleOwner = viewLifecycleOwner
         }.root
@@ -41,7 +41,7 @@ internal class NoteListFragment(
         super.onViewCreated(view, savedInstanceState)
         NoteListNavigator(this, noteService).observeNavigation(
             viewLifecycleOwner,
-            viewModel.presenter.navigation
+            viewModel.navigation
         )
     }
 }

@@ -6,19 +6,16 @@ import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
 import kotlinx.coroutines.CoroutineScope
 
-internal class NoteListViewModel(private val noteService: NoteService) : ViewModel() {
-
-    companion object {
-        var serviceOverride: NoteService? = null
-    }
-
+internal class NoteListViewModel(noteService: NoteService) : ViewModel() {
+    val view: NoteListViewContainer by lazy { NoteListViewContainer() }
+    val navigation: NoteListNavigation by lazy { NoteListNavigation() }
     /**
      * ADR # 4. MVP: Store Presenter inside ViewModel
      */
     val presenter = NoteListPresenter(
-        NoteListViewContainer(),
-        NoteListNavigation(),
-        serviceOverride ?: noteService,
+        view,
+        navigation,
+        noteService,
         CoroutineScope(NotesDispatchers.Main)
     )
 
