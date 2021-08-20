@@ -1,8 +1,10 @@
 // ADR # 20. Feature modules: Put private API classes into package named 'internal'
 package com.example.notesfeature.internal.notelist
 
+import com.example.notesfeature.internal.TrackingHelper
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -16,6 +18,7 @@ internal class NoteListPresenter(
     private val view: NoteListViewContainer,
     private val navigation: NoteListNavigation,
     private val service: NoteService,
+    private val analytics: Analytics,
     scope: CoroutineScope
 ) : CoroutineScope by scope {
 
@@ -27,6 +30,7 @@ internal class NoteListPresenter(
      * ADR # 7. MVP: Prefix Presenter methods handling user input with 'on'
      */
     fun onNoteSelected(note: Note) {
+        analytics.trackEvent(TrackingHelper.NOTE_LIST_OPEN_DETAILS.plus(note.id))
         navigation.openNoteDetails(note)
     }
 
@@ -38,6 +42,7 @@ internal class NoteListPresenter(
         launch {
             view.setLoading(true)
             view.showNotes(service.getNotes())
+            analytics.trackEvent(TrackingHelper.NOTE_LIST_SHOWN)
             view.setLoading(false)
         }
     }
