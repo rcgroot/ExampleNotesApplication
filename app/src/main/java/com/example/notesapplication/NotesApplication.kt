@@ -11,7 +11,7 @@ class NotesApplication : Application() {
     lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate() {
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate()
 
         applicationComponent = ApplicationComponent(

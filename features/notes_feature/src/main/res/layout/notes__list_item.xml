@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{note.title}"
+            android:textColor="?attr/notes__note_title_color"
             android:textAppearance="?attr/textAppearanceListItem"
             tools:text="The title of the note entry" />
 
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{note.body}"
+            android:textColor="?attr/notes__note_subtitle_color"
             android:textAppearance="?attr/textAppearanceListItemSecondary"
             tools:text="The body of the note entry" />
     </LinearLayout>
