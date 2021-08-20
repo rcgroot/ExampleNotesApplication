@@ -3,6 +3,7 @@ package com.example.notesfeature.internal.notelist
 
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -16,10 +17,12 @@ internal class NoteListPresenter(
     private val view: NoteListViewContainer,
     private val navigation: NoteListNavigation,
     private val service: NoteService,
+    private val analytics: Analytics,
     scope: CoroutineScope
 ) : CoroutineScope by scope {
 
     fun start() {
+        analytics.trackEvent("NoteList.shown")
         loadNotes()
     }
 
@@ -27,6 +30,7 @@ internal class NoteListPresenter(
      * ADR # 7. MVP: Prefix Presenter methods handling user input with 'on'
      */
     fun onNoteSelected(note: Note) {
+        analytics.trackEvent("NotesList.openDetails.${note.id}")
         navigation.openNoteDetails(note)
     }
 

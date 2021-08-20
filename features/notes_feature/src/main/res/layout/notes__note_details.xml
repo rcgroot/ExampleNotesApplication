@@ -57,6 +57,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:layout_marginBottom="25dp"
                 app:titleOnLoaded="@{view.note}"
+                android:textColor="?attr/notes__note_title_color"
                 tools:text="The title of the note entry" />
 
             <TextView
@@ -70,6 +71,7 @@
                 android:id="@+id/item_content_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/notes__note_subtitle_color"
                 app:contentOnLoaded="@{view.note}"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 tools:text="The body of the note entry" />

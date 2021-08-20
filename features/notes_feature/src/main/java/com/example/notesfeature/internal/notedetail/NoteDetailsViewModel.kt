@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 
-internal class NoteDetailsViewModel(noteService: NoteService, noteId: Int) : ViewModel() {
+internal class NoteDetailsViewModel(noteService: NoteService, analytics: Analytics, noteId: Int) : ViewModel() {
 
     /**
      * ADR # 4. MVP: Store Presenter inside ViewModel
@@ -15,6 +16,7 @@ internal class NoteDetailsViewModel(noteService: NoteService, noteId: Int) : Vie
         NoteDetailsViewContainer(),
         NoteDetailsNavigation(),
         noteService,
+        analytics,
         noteId,
         CoroutineScope(NotesDispatchers.Main)
     )
@@ -28,9 +30,9 @@ internal class NoteDetailsViewModel(noteService: NoteService, noteId: Int) : Vie
         presenter.clear()
     }
 
-    class Factory(private val noteService: NoteService,private val noteId: Int) :
+    class Factory(private val noteService: NoteService , private val analytics: Analytics, private val noteId: Int) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            NoteDetailsViewModel(noteService, noteId) as T
+            NoteDetailsViewModel(noteService, analytics, noteId) as T
     }
 }

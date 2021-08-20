@@ -2,7 +2,7 @@ package com.example.notesfeature.internal.notelist
 
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
-import com.example.notesfeature.internal.notelist.NoteListViewContainer
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -24,7 +24,8 @@ internal class NoteListPresenterTest {
     private val view: NoteListViewContainer = mock()
     private val navigation: NoteListNavigation = mock()
     private val service: NoteService = mock()
-    private val sut = NoteListPresenter(view, navigation, service, scope)
+    private val analytics: Analytics = mock()
+    private val sut = NoteListPresenter(view, navigation, service, analytics, scope)
 
     @Test
     fun `after initialization note will be loaded`() = runBlocking {
@@ -49,5 +50,21 @@ internal class NoteListPresenterTest {
         sut.onRefreshNotes()
 
         verify(service).getNotes()
+    }
+
+    @Test
+    fun `when screen is shown analytics event is triggered`() {
+        sut.start()
+
+        verify(analytics).trackEvent("NoteList.shown")
+    }
+
+    @Test
+    fun `when note is clicked analytics event is triggered`() {
+        val note = Note(1, "", "")
+
+        sut.onNoteSelected(note)
+
+        verify(analytics).trackEvent("NotesList.openDetails.${note.id}")
     }
 }

@@ -13,7 +13,7 @@ import org.mockito.kotlin.whenever
 class NoteServiceTest {
 
     private val backend: BackendCommunication = mock()
-    private val sut = NoteService(backend)
+    private val sut = NoteServiceImpl(backend)
 
     @Test
     fun `test getting empty not list`(): Unit = runBlocking {

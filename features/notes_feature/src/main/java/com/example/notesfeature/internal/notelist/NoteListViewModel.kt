@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.notesfeature.NotesDispatchers
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 
-internal class NoteListViewModel(noteService: NoteService) : ViewModel() {
+internal class NoteListViewModel(noteService: NoteService, analytics: Analytics) : ViewModel() {
     val view: NoteListViewContainer by lazy { NoteListViewContainer() }
     val navigation: NoteListNavigation by lazy { NoteListNavigation() }
     /**
@@ -16,6 +17,7 @@ internal class NoteListViewModel(noteService: NoteService) : ViewModel() {
         view,
         navigation,
         noteService,
+        analytics,
         CoroutineScope(NotesDispatchers.Main)
     )
 
@@ -28,9 +30,9 @@ internal class NoteListViewModel(noteService: NoteService) : ViewModel() {
         presenter.clear()
     }
 
-    class Factory(private val noteService: NoteService) :
+    class Factory(private val noteService: NoteService, private val analytics: Analytics) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            NoteListViewModel(noteService) as T
+            NoteListViewModel(noteService, analytics) as T
     }
 }

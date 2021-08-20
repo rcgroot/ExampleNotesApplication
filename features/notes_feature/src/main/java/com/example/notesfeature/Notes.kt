@@ -11,42 +11,43 @@ import com.example.notesfeature.internal.notedetail.NoteDetailsFragment
 import com.example.notesfeature.internal.notelist.NoteListFragment
 import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.internal.service.NoteServiceImpl
+import com.example.support.Analytics
 
 /**
  * ADR # 13. Feature modules: Expose only a single Fragment to public and use child Fragments for internal flows
  */
-fun noteListFragment(scope: FragmentActivity, backendCommunication: BackendCommunication): Fragment {
-    val viewModel = scope.get(backendCommunication)
-    return NoteListFragment(viewModel.noteService)
+fun noteListFragment(scope: FragmentActivity, backendCommunication: BackendCommunication, analytics: Analytics): Fragment {
+    val viewModel = scope.get(backendCommunication, analytics)
+    return NoteListFragment(viewModel.noteService, viewModel.analytics)
 }
 
 /**
  * ADR # 21. Use AndroidX Fragment factories to inject dependencies into Fragments
  */
-fun notesFragmentFactory(scope: FragmentActivity, backendCommunication: BackendCommunication) = object : FragmentFactory() {
+fun notesFragmentFactory(scope: FragmentActivity, backendCommunication: BackendCommunication, analytics: Analytics) = object : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-        val viewModel = scope.get(backendCommunication)
+        val viewModel = scope.get(backendCommunication, analytics)
         return when (Class.forName(className).kotlin) {
-            NoteListFragment::class -> NoteListFragment(viewModel.noteService)
-            NoteDetailsFragment::class -> NoteDetailsFragment(viewModel.noteService)
+            NoteListFragment::class -> NoteListFragment(viewModel.noteService, viewModel.analytics)
+            NoteDetailsFragment::class -> NoteDetailsFragment(viewModel.noteService, viewModel.analytics)
             else -> super.instantiate(classLoader, className)
         }
     }
 }
 
-internal class Graph(private val service: NoteService) : ViewModel() {
+internal class Graph(private val service: NoteService, val analytics: Analytics) : ViewModel() {
     val noteService: NoteService
         get() = serviceOverride ?: service
 
     companion object {
         var serviceOverride: NoteService? = null
-        fun FragmentActivity.get(backendCommunication: BackendCommunication) =
-            ViewModelProvider(this, Factory(backendCommunication)).get(Graph::class.java)
+        fun FragmentActivity.get(backendCommunication: BackendCommunication, analytics: Analytics) =
+            ViewModelProvider(this, Factory(backendCommunication, analytics)).get(Graph::class.java)
     }
 
-    class Factory(private val backendCommunication: BackendCommunication) :
+    class Factory(private val backendCommunication: BackendCommunication, private val analytics: Analytics) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            Graph(NoteServiceImpl(backendCommunication)) as T
+            Graph(NoteServiceImpl(backendCommunication), analytics) as T
     }
 }
