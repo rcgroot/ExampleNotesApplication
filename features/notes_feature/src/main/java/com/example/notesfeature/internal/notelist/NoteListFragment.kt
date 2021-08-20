@@ -43,7 +43,7 @@ internal class NoteListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NoteListNavigator(this, noteService).observeNavigation(
+        NoteListNavigator(this, noteService, analytics).observeNavigation(
             viewLifecycleOwner,
             viewModel.navigation
         )
