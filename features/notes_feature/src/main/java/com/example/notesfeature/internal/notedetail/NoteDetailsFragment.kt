@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesNoteDetailsBinding
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 
 private const val ARGUMENTS_ID = "ARGUMENTS_ID"
 
@@ -19,11 +20,11 @@ private const val ARGUMENTS_ID = "ARGUMENTS_ID"
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  * ADR # 19. Organise source files into packages by feature, not layers
  */
-internal class NoteDetailsFragment(noteService: NoteService) : DialogFragment() {
+internal class NoteDetailsFragment(noteService: NoteService, analytics: Analytics) : DialogFragment() {
 
     private val noteId: Int
         get() = checkNotNull(requireArguments().getInt(ARGUMENTS_ID))
-    private val viewModel by viewModels<NoteDetailsViewModel> { NoteDetailsViewModel.Factory(noteService, noteId) }
+    private val viewModel by viewModels<NoteDetailsViewModel> { NoteDetailsViewModel.Factory(noteService, analytics, noteId) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,8 +1,12 @@
 // ADR # 20. Feature modules: Put private API classes into package named 'internal'
 package com.example.notesfeature.internal.notedetail
 
+import androidx.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting.*
 import com.example.notesfeature.internal.notedetail.NoteState.SingleNote
+import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -16,11 +20,16 @@ internal class NoteDetailsPresenter(
     val view: NoteDetailsViewContainer,
     val navigation: NoteDetailsNavigation,
     private val service: NoteService,
+    private val analytics: Analytics,
     private val noteId: Int,
     scope: CoroutineScope
 ) : CoroutineScope by scope {
 
+    @VisibleForTesting(otherwise = PRIVATE)
+    var cachedNote: Note? = null
+
     fun start() {
+        analytics.trackEvent("NoteDetails.Shown.$noteId")
         loadNote()
     }
 
@@ -28,7 +37,8 @@ internal class NoteDetailsPresenter(
      * ADR # 7. MVP: Prefix Presenter methods handling user input with 'on'
      */
     fun onCloseNoteSelected() {
-        navigation.closeNoteDetails((view.note.value as SingleNote).note)
+        analytics.trackEvent("NoteDetails.back")
+        navigation.closeNoteDetails(cachedNote ?: Note(-1, "", ""))
     }
 
     fun clear() {
@@ -38,7 +48,9 @@ internal class NoteDetailsPresenter(
     private fun loadNote() {
         launch {
             view.setLoading(true)
-            view.showNote(SingleNote(service.getNote(noteId)))
+            val note = service.getNote(noteId)
+            cachedNote = note
+            view.showNote(SingleNote(note))
             view.setLoading(false)
         }
     }
