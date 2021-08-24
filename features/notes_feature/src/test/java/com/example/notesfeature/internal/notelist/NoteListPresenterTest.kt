@@ -1,8 +1,10 @@
 package com.example.notesfeature.internal.notelist
 
+import com.example.notesfeature.internal.TrackingHelper
 import com.example.notesfeature.internal.service.Note
 import com.example.notesfeature.internal.service.NoteService
 import com.example.notesfeature.internal.notelist.NoteListViewContainer
+import com.example.support.Analytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -24,7 +26,8 @@ internal class NoteListPresenterTest {
     private val view: NoteListViewContainer = mock()
     private val navigation: NoteListNavigation = mock()
     private val service: NoteService = mock()
-    private val sut = NoteListPresenter(view, navigation, service, scope)
+    private val analytics: Analytics = mock()
+    private val sut = NoteListPresenter(view, navigation, service, analytics, scope)
 
     @Test
     fun `after initialization note will be loaded`() = runBlocking {
@@ -35,12 +38,14 @@ internal class NoteListPresenterTest {
         verify(view).setLoading(true)
         verify(service).getNotes()
         verify(view).showNotes(notes)
+        verify(analytics).trackEvent(TrackingHelper.NOTE_LIST_SHOWN)
     }
 
     @Test
     fun `when note is selected details should open`() = runBlocking {
         sut.onNoteSelected(note)
 
+        verify(analytics).trackEvent(TrackingHelper.NOTE_LIST_OPEN_DETAILS.plus(note.id))
         verify(navigation).openNoteDetails(note)
     }
 
@@ -48,6 +53,7 @@ internal class NoteListPresenterTest {
     fun `when refreshing new notes are loaded`() = runBlockingTest {
         sut.onRefreshNotes()
 
+        verify(analytics).trackEvent(TrackingHelper.NOTE_LIST_SHOWN)
         verify(service).getNotes()
     }
 }

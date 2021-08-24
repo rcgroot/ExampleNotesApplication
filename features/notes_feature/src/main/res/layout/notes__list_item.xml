@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:onClick="@{onClickListener}"
         android:background="?android:attr/selectableItemBackground"
-
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
@@ -30,6 +29,7 @@
             android:id="@+id/item_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?attr/notes__note_title_color"
             android:text="@{note.title}"
             android:textAppearance="?attr/textAppearanceListItem"
             tools:text="The title of the note entry" />
