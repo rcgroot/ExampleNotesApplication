@@ -8,17 +8,21 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-internal class NoteService(
-    private val backendCommunication: BackendCommunication
-) {
+internal interface NoteService {
 
-    suspend fun getNotes(): List<Note> = withContext(NotesDispatchers.IO) {
+    suspend fun getNotes(): List<Note>
+
+    suspend fun getNote(id: Int): Note
+}
+
+internal class NoteServiceImpl(private val backendCommunication: BackendCommunication) : NoteService {
+    override suspend fun getNotes(): List<Note> = withContext(NotesDispatchers.IO) {
         val request = Request(Operation.GET, "/notes")
         val response = backendCommunication.execute(request)
         Json.decodeFromString<Notes>(response.body).notes
     }
 
-    suspend fun getNote(id: Int): Note = withContext(NotesDispatchers.IO) {
+    override suspend fun getNote(id: Int): Note = withContext(NotesDispatchers.IO) {
         val request = Request(Operation.GET, "/notes/$id")
         val response = backendCommunication.execute(request)
         Json.decodeFromString(response.body)

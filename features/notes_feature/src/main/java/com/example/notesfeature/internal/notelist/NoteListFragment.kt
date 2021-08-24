@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.backend.BackendCommunication
 import com.example.notesfeature.R
 import com.example.notesfeature.databinding.NotesListBinding
+import com.example.notesfeature.internal.service.NoteService
 
 /**
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  * ADR # 19. Organise source files into packages by feature, not layers
  */
 internal class NoteListFragment(
-    private val backend: BackendCommunication
+    private val noteService: NoteService
 ) : Fragment() {
 
-    private val viewModel by viewModels<NoteListViewModel> { NoteListViewModel.Factory(backend) }
+    private val viewModel by viewModels<NoteListViewModel> { NoteListViewModel.Factory(noteService) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +32,16 @@ internal class NoteListFragment(
             container,
             false
         ).apply {
-            view = viewModel.presenter.view
+            view = viewModel.view
             presenter = viewModel.presenter
             lifecycleOwner = viewLifecycleOwner
         }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NoteListNavigator(this, backend).observeNavigation(
+        NoteListNavigator(this, noteService).observeNavigation(
             viewLifecycleOwner,
-            viewModel.presenter.navigation
+            viewModel.navigation
         )
     }
 }

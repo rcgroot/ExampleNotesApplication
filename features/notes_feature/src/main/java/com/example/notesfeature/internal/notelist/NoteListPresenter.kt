@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
  * ADR # 14. Feature modules: Limit public API with 'internal' visibility
  */
 internal class NoteListPresenter(
-    val view: NoteListViewContainer,
-    val navigation: NoteListNavigation,
+    private val view: NoteListViewContainer,
+    private val navigation: NoteListNavigation,
     private val service: NoteService,
     scope: CoroutineScope
 ) : CoroutineScope by scope {

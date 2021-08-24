@@ -13,7 +13,6 @@ import com.example.notesfeature.R
 import org.hamcrest.CoreMatchers.both
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.Description
-import org.hamcrest.Matcher
 
 inline fun notes(block: NoteListRobot.() -> Unit) = NoteListRobot().apply(block)
 

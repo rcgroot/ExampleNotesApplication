@@ -13,15 +13,16 @@ class MainActivity : AppCompatActivity() {
         get() = this.applicationComponent.backendCommunication
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = notesFragmentFactory(backendCommunication)
+        supportFragmentManager.fragmentFactory = notesFragmentFactory(this, backendCommunication)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
+            val fragment = noteListFragment(this, backendCommunication)
             supportFragmentManager.commit {
                 add(
                     R.id.main_container,
-                    noteListFragment(backendCommunication)
+                    fragment
                 )
             }
         }
