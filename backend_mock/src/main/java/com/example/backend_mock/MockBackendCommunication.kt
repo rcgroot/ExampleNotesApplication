@@ -2,6 +2,7 @@ package com.example.backend_mock
 
 import android.content.Context
 import android.os.SystemClock
+import androidx.core.content.edit
 import com.example.backend.BackendCommunication
 import com.example.backend.Operation
 import com.example.backend.Request
@@ -11,17 +12,23 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-private const val MOCK_NETWORK_DELAY = 750L
+private const val DELAY_KEY = "DELAY"
+private const val DELAY_DEFAULT_VALUE = 750L
 
-class MockBackendCommunication(private val context: Context) : BackendCommunication {
+class MockBackendCommunication(context: Context) : BackendCommunication {
+
+    private val preferences = context.getSharedPreferences("MockBackendCommunication", Context.MODE_PRIVATE)
+    var mockNetworkDelay: Long
+        get() = preferences.getLong(DELAY_KEY, DELAY_DEFAULT_VALUE)
+        set(value) = preferences.edit { putLong(DELAY_KEY, value) }
 
     override fun execute(request: Request): Response =
         when (request.operation) {
             Operation.GET -> get(request.path).also {
-                SystemClock.sleep(MOCK_NETWORK_DELAY)
+                SystemClock.sleep(mockNetworkDelay)
             }
             Operation.POST -> post(request.path, request.body).also {
-                SystemClock.sleep(MOCK_NETWORK_DELAY)
+                SystemClock.sleep(mockNetworkDelay)
             }
         }
 }
