@@ -11,7 +11,7 @@ import com.example.notesfeature.noteListFragment
 import com.example.notesfeature.notesFragmentFactory
 
 class NotesListTestActivity : FragmentActivity() {
-    private val backendCommunication: BackendCommunication = MockBackendCommunication(this)
+    private val backendCommunication: BackendCommunication by lazy { MockBackendCommunication(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory = notesFragmentFactory(this, backendCommunication)
