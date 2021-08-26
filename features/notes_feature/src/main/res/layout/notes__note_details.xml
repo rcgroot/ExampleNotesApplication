@@ -23,11 +23,11 @@
 
         <!-- TODO fill this field with data -->
         <TextView
-            android:id="@+id/notes__postiontion_indicator"
+            android:id="@+id/notes__position_indicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Note 4 out of 12"
-            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:positionOnLoaded="@{view.note}"
+            android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="@+id/close_icon"
             app:layout_constraintEnd_toStartOf="@+id/close_icon"
             app:layout_constraintStart_toStartOf="parent"

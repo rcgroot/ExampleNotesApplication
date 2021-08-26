@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.backend_mock.MockBackendCommunication
 import com.example.notesapplication.dependecies.ApplicationComponent
+import com.example.notesfeature.NotesDispatchers
+import kotlinx.coroutines.runBlocking
 
 class NotesApplication : Application() {
 
@@ -13,9 +15,11 @@ class NotesApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate()
 
-        applicationComponent = ApplicationComponent(
-            //TODO Fix doing blocking application startup caused by IO on Main thread
-            backendCommunication = MockBackendCommunication(this)
-        )
+        runBlocking (NotesDispatchers.IO) {
+            applicationComponent = ApplicationComponent(
+                //TODO Fix doing blocking application startup caused by IO on Main thread
+                backendCommunication = MockBackendCommunication(this@NotesApplication)
+            )
+        }
     }
 }

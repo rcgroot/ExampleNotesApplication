@@ -50,6 +50,8 @@ val noteList = Data(
     mutableListOf(
         Note(1, "First note", "This this a first note created every in this sample application"),
         Note(2, "Second note", "Another note"),
+        Note(5, "Third note", "Another note"),
+        Note(8, "Fourth note", "Another note"),
     )
 )
 

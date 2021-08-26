@@ -4,6 +4,7 @@ package com.example.notesfeature.internal.notedetail
 import com.example.notesfeature.internal.notedetail.NoteState.SingleNote
 import com.example.notesfeature.internal.service.NoteService
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
@@ -38,7 +39,13 @@ internal class NoteDetailsPresenter(
     private fun loadNote() {
         launch {
             view.setLoading(true)
-            view.showNote(SingleNote(service.getNote(noteId)))
+            // Start loading in background
+            val noteAsync = async { service.getNote(noteId) }
+            val notesAsync = async { service.getNotes() }
+            // Wait for results
+            val note = noteAsync.await()
+            val notes = notesAsync.await()
+            view.showNote(SingleNote(note, notes.indexOf(note) + 1, notes.size))
             view.setLoading(false)
         }
     }

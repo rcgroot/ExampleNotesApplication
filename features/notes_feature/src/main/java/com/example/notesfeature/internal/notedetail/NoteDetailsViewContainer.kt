@@ -31,5 +31,5 @@ internal class NoteDetailsViewContainer {
  */
 internal sealed class NoteState {
     object Placeholder : NoteState()
-    data class SingleNote(val note: Note) : NoteState()
+    data class SingleNote(val note: Note, val position: Int, val totalCount: Int) : NoteState()
 }

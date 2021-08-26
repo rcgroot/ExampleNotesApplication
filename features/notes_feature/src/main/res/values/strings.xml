@@ -6,4 +6,5 @@
     <!-- NoteDetails -->
     <string name="notes__note_details_title">Title</string>
     <string name="notes__note_details_body">Content</string>
+    <string name="notes__note_details_position">Note %d out of %d</string>
 </resources>
