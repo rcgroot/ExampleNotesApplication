@@ -4,7 +4,10 @@ package com.example.notesfeature.internal.notedetail
 import com.example.notesfeature.internal.notedetail.NoteState.SingleNote
 import com.example.notesfeature.internal.service.NoteService
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ADR # 2. Use Model-View-Presenter architecture
@@ -36,10 +39,20 @@ internal class NoteDetailsPresenter(
     }
 
     private fun loadNote() {
-        launch {
-            view.setLoading(true)
-            view.showNote(SingleNote(service.getNote(noteId)))
-            view.setLoading(false)
+        launch(context = Dispatchers.IO) {
+            val deferredNote = async { service.getNote(noteId) }
+            val deferredNoteList = async { service.getNotes() }
+
+            val noteList = deferredNoteList.await()
+            val note = deferredNote.await()
+
+            withContext(context = Dispatchers.Default) {
+                val length = noteList.size
+                val position = noteList.indexOf(note) + 1
+                view.showNote(SingleNote(note, position, length))
+
+                view.setLoading(false)
+            }
         }
     }
 }

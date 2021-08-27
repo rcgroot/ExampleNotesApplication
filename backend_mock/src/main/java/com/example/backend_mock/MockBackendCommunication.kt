@@ -17,7 +17,7 @@ private const val DELAY_DEFAULT_VALUE = 750L
 
 class MockBackendCommunication(context: Context) : BackendCommunication {
 
-    private val preferences = context.getSharedPreferences("MockBackendCommunication", Context.MODE_PRIVATE)
+    private val preferences by lazy { context.getSharedPreferences("MockBackendCommunication", Context.MODE_PRIVATE) }
     var mockNetworkDelay: Long
         get() = preferences.getLong(DELAY_KEY, DELAY_DEFAULT_VALUE)
         set(value) = preferences.edit { putLong(DELAY_KEY, value) }
@@ -50,6 +50,10 @@ val noteList = Data(
     mutableListOf(
         Note(1, "First note", "This this a first note created every in this sample application"),
         Note(2, "Second note", "Another note"),
+        Note(7, "The third note", "Another note"),
+        Note(8, "The forth note", "Another note"),
+        Note(5, "The fifth note", "Another note"),
+        Note(3, "The sixth note", "Another note"),
     )
 )
 
